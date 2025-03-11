@@ -1,0 +1,191 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lora:wght@400;600&display=swap");
+
+/* Global Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9fafb;
+}
+
+/* Navbar */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  background-color: #166534;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-title {
+  padding:10;
+  gap:8px;
+  font-size: 30px;
+  font-family:'Courier New', Courier, monospace;
+}
+
+.header-nav {
+  flex-grow: 0;
+  display: flex;
+}
+
+.header-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  padding-right: 20px;
+}
+
+.header-menu-item:last-child {
+  margin-right: 30px;
+}
+
+.header-link {
+  color: white;
+  text-decoration: none;
+}
+
+.header-link:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+.header2 {
+  position: relative;
+  background-image: url("bottles.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header2-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.header2-text {
+  position: relative;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  max-width: 700px;
+  padding: 20px;
+}
+
+/* Waste Categories Section */
+.waste-section {
+  background-color: #eafaf1;
+  padding: 40px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #166534;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.category-card {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Plastic Category */
+.category-card:nth-child(1) {
+  background-image: url("Plastic.webp");
+}
+
+/* Organic Category */
+.category-card:nth-child(2) {
+  background-image: url("organic.webp");
+}
+
+/* Glass Category */
+.category-card:nth-child(3) {
+  background-image: url("glass.webp");
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.card-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.category-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.category-desc {
+  font-size: 14px;
+}
+
+/* Border Colors */
+.green-border {
+  border-top: 4px solid #28a745;
+}
+
+.yellow-border {
+  border-top: 4px solid #ffcc00;
+}
+
+.blue-border {
+  border-top: 4px solid #007bff;
+}
+
+/* Text Colors */
+.white-text {
+  color: white;
+}
+
+.yellow-text {
+  color: #ffcc00;
+}
+
+/* Footer */
+.footer {
+  background: #166534;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
