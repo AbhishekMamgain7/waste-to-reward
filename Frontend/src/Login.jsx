@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+// import { app } from "./firebaseConfig";
 import "./Login.css";
 
 const Login = () => {
@@ -16,6 +18,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <div className="login-overlay"></div>
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -52,7 +55,7 @@ const Login = () => {
         </form>
 
         <p className="login-footer">
-          Don't have an account? <a href="#">Sign up</a>
+          Don't have an account? <Link to="/signup">Sign up</Link>
         </p>
       </motion.div>
     </div>
