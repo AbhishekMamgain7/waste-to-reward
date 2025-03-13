@@ -1,10 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./HomePage.css";
-
-// Define a function for login click (If required)
-const handleLoginClick = () => {
-  alert("Login button clicked!");
-};
 
 const categories = [
   {
@@ -12,7 +8,7 @@ const categories = [
     description: "Earn Goodman Points as per the quality and quantity.",
     borderColor: "green-border",
     textColor: "white-text",
-    imageClass: "plastic-bg", // New CSS class for background image
+    imageClass: "plastic-bg",
   },
   {
     name: "Organic",
@@ -30,25 +26,27 @@ const categories = [
   },
 ];
 
-const HomePage = () => {
+function HomePage() {
   return (
     <div className="container">
-      {/* Navbar */}
       <header className="header">
         <h1 className="header-title">Waste to Reward</h1>
         <nav className="header-nav">
           <ul className="header-menu">
             <li className="header-menu-item">
-              <a onClick={handleLoginClick} className="header-link">Login</a>
+              <Link to="/login" className="header-link">
+                Login
+              </Link>
             </li>
             <li className="header-menu-item">
-              <a href="#services" className="header-link">AI Assistant</a>
+              <a href="#services" className="header-link">
+                AI Assistant
+              </a>
             </li>
           </ul>
         </nav>
       </header>
 
-      {/* Header Section */}
       <div className="header2">
         <div className="header2-overlay"></div>
         <h1 className="header2-text">
@@ -56,7 +54,6 @@ const HomePage = () => {
         </h1>
       </div>
 
-      {/* Waste Categories */}
       <section className="waste-section">
         <h2 className="section-title">Waste Categories</h2>
         <div className="categories">
@@ -77,12 +74,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         &copy; 2025 Waste to Rewards. All Rights Reserved.
       </footer>
     </div>
   );
-};
+}
 
 export default HomePage;

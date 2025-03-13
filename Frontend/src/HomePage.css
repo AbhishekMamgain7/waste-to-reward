@@ -14,7 +14,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  background-color: #166534;
+  background-color: #176635;
   color: white;
   font-size: 24px;
   font-weight: bold;
@@ -23,10 +23,10 @@ body {
 }
 
 .header-title {
-  padding:10;
-  gap:8px;
+  padding: 10;
+  gap: 8px;
   font-size: 30px;
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .header-nav {
@@ -188,4 +188,3 @@ body {
   font-size: 14px;
   margin-top: 20px;
 }
-
