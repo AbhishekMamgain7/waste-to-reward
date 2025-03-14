@@ -10,32 +10,56 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    age: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    const form = e.target;
-    const fullName = form.fullName.value;
-    const age = form.age.value;
-    const phoneNumber = form.phoneNumber.value;
-    const email = form.email.value;
-    const password = form.password.value;
+
+
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
+      alert("Invalid email format.");
+      setFormData({ ...formData, email: "" });
+      setFormData({ ...formData, password: "" });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-
-      alert(`Signup complete!\nName: ${fullName}\nAge: ${age}\nPhone: ${phoneNumber}`);
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      alert("Signup complete!");
       navigate("/login");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("You are already registered. Try to login.");
         navigate("/login");
+      } else if (error.code === "auth/weak-password") {
+        alert("Password is too weak. Please try a stronger password.");
+        setFormData({ ...formData, password: "" });
       } else {
-        alert("Error: " + error.message);
+        alert("An error occurred. Please try again.");
       }
     } finally {
+      if (formData.password !== "") {
+        setFormData({
+          fullName: "",
+          age: "",
+          phoneNumber: "",
+          email: "",
+          password: "",
+        });
+      }
       setIsSubmitting(false);
-      form.reset();
     }
   };
 
@@ -57,6 +81,8 @@ const SignUp = () => {
             whileFocus={{ scale: 1.05 }}
             type="text"
             placeholder="Full Name"
+            value={formData.fullName}
+            onChange={handleChange}
             required
             className="login-input"
           />
@@ -65,6 +91,8 @@ const SignUp = () => {
             whileFocus={{ scale: 1.05 }}
             type="number"
             placeholder="Age"
+            value={formData.age}
+            onChange={handleChange}
             required
             className="login-input"
           />
@@ -73,6 +101,8 @@ const SignUp = () => {
             whileFocus={{ scale: 1.05 }}
             type="text"
             placeholder="Phone Number"
+            value={formData.phoneNumber}
+            onChange={handleChange}
             required
             className="login-input"
           />
@@ -81,6 +111,8 @@ const SignUp = () => {
             whileFocus={{ scale: 1.05 }}
             type="email"
             placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
             required
             className="login-input"
           />
@@ -89,6 +121,8 @@ const SignUp = () => {
             whileFocus={{ scale: 1.05 }}
             type="password"
             placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
             required
             className="login-input"
           />
