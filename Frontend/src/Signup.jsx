@@ -22,14 +22,35 @@ const SignUp = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validatePassword = (password) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*]/.test(password);
+    const specialCharCount = (password.match(/[!@#$%^&*]/g) || []).length;
+
+    return (
+      password.length >= 6 &&
+      hasUpperCase &&
+      hasLowerCase &&
+      hasDigit &&
+      specialCharCount === 1
+    );
+  };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-
     if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
       alert("Invalid email format.");
-      setFormData({ ...formData, email: "" });
+      setFormData({ ...formData, email: "", password: "" });
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!validatePassword(formData.password)) {
+      alert("Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and exactly one special character.");
       setFormData({ ...formData, password: "" });
       setIsSubmitting(false);
       return;
@@ -43,25 +64,21 @@ const SignUp = () => {
       if (error.code === "auth/email-already-in-use") {
         alert("You are already registered. Try to login.");
         navigate("/login");
-      } else if (error.code === "auth/weak-password") {
-        alert("Password is too weak. Please try a stronger password.");
-        setFormData({ ...formData, password: "" });
       } else {
         alert("An error occurred. Please try again.");
       }
     } finally {
-      if (formData.password !== "") {
-        setFormData({
-          fullName: "",
-          age: "",
-          phoneNumber: "",
-          email: "",
-          password: "",
-        });
-      }
       setIsSubmitting(false);
+      setFormData({
+        fullName: "",
+        age: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+      });
     }
   };
+
 
   return (
     <div className="login-container">
