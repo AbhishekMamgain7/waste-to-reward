@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 // import { app } from "./firebaseConfig";
-import "./Login.css";
+import "./Login.css"; // Reusing styles from Login
 
-const Login = () => {
+const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setTimeout(() => {
-      alert("Login Successful!");
+      alert("Sign Up Successful!");
       setIsSubmitting(false);
     }, 2000);
   };
@@ -25,10 +25,31 @@ const Login = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="login-box"
       >
-        <h2 className="login-title">Welcome Back</h2>
-        <p className="login-subtitle">Sign in to continue</p>
+        <h2 className="login-title">Create an Account</h2>
+        <p className="login-subtitle">Join us and start earning rewards!</p>
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSignup}>
+          <motion.input
+            whileFocus={{ scale: 1.05 }}
+            type="text"
+            placeholder="Full Name"
+            required
+            className="login-input"
+          />
+          <motion.input
+            whileFocus={{ scale: 1.05 }}
+            type="number"
+            placeholder="Age"
+            required
+            className="login-input"
+          />
+          <motion.input
+            whileFocus={{ scale: 1.05 }}
+            type="text"
+            placeholder="Phone Number"
+            required
+            className="login-input"
+          />
           <motion.input
             whileFocus={{ scale: 1.05 }}
             type="email"
@@ -43,6 +64,7 @@ const Login = () => {
             required
             className="login-input"
           />
+
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -50,16 +72,16 @@ const Login = () => {
             className="login-button"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Logging in..." : "Login"}
+            {isSubmitting ? "Signing up..." : "Sign Up"}
           </motion.button>
         </form>
 
         <p className="login-footer">
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </motion.div>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;
