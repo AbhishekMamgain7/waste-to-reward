@@ -1,4 +1,4 @@
-# Graph-e-Thon
+# Waste-to-Reward
 
 # 🌍 Waste to Reward System
 
