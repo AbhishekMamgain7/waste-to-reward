@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "./firebaseConfig";
+import { getAuth, createUserWithEmailAndPassword, } from "firebase/auth";
+import { app, database } from "./firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 import "./Login.css";
 
-const SignUp = () => {
+function SignUp() {
   const auth = getAuth(app);
+  const collectionRef = collection(database, 'users');
+
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -59,6 +62,19 @@ const SignUp = () => {
     try {
       await createUserWithEmailAndPassword(auth, formData.email, formData.password);
       alert("Signup complete!");
+      addDoc(collectionRef, {
+        email: formData.email, 
+        password: formData.password,
+        fullName : formData.fullName,
+        age : formData.age,
+        phoneNumber : formData.phoneNumber
+      })
+      .then(() => {
+        console.log("Data Added");
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
       navigate("/login");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -101,8 +117,7 @@ const SignUp = () => {
             value={formData.fullName}
             onChange={handleChange}
             required
-            className="login-input"
-          />
+            className="login-input" />
           <motion.input
             name="age"
             whileFocus={{ scale: 1.05 }}
@@ -111,8 +126,7 @@ const SignUp = () => {
             value={formData.age}
             onChange={handleChange}
             required
-            className="login-input"
-          />
+            className="login-input" />
           <motion.input
             name="phoneNumber"
             whileFocus={{ scale: 1.05 }}
@@ -121,8 +135,7 @@ const SignUp = () => {
             value={formData.phoneNumber}
             onChange={handleChange}
             required
-            className="login-input"
-          />
+            className="login-input" />
           <motion.input
             name="email"
             whileFocus={{ scale: 1.05 }}
@@ -131,8 +144,7 @@ const SignUp = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="login-input"
-          />
+            className="login-input" />
           <motion.input
             name="password"
             whileFocus={{ scale: 1.05 }}
@@ -141,8 +153,7 @@ const SignUp = () => {
             value={formData.password}
             onChange={handleChange}
             required
-            className="login-input"
-          />
+            className="login-input" />
 
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -161,6 +172,6 @@ const SignUp = () => {
       </motion.div>
     </div>
   );
-};
+}
 
 export default SignUp;
