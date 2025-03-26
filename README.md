@@ -1,4 +1,4 @@
-# Waste-to-Reward
+# SupplyGenie
 
 # 🌍 Waste to Reward System
 
